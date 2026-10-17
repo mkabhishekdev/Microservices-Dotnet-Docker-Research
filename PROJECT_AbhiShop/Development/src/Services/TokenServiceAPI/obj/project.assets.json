@@ -3983,19 +3983,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/mkabhishek/.nuget/packages/": {}
+    "/tmp/codeql-scratch-8d4b6dec558e2a35/dbs/csharp/working/packages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mkabhishek/Desktop/MigrationProjects/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/TokenServiceAPI/TokenServiceAPI.csproj",
+      "projectUniqueName": "/home/runner/work/Microservices-Dotnet-Docker-Research/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/TokenServiceAPI/TokenServiceAPI.csproj",
       "projectName": "TokenServiceAPI",
-      "projectPath": "/Users/mkabhishek/Desktop/MigrationProjects/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/TokenServiceAPI/TokenServiceAPI.csproj",
-      "packagesPath": "/Users/mkabhishek/.nuget/packages/",
-      "outputPath": "/Users/mkabhishek/Desktop/MigrationProjects/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/TokenServiceAPI/obj/",
+      "projectPath": "/home/runner/work/Microservices-Dotnet-Docker-Research/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/TokenServiceAPI/TokenServiceAPI.csproj",
+      "packagesPath": "/tmp/codeql-scratch-8d4b6dec558e2a35/dbs/csharp/working/packages",
+      "outputPath": "/home/runner/work/Microservices-Dotnet-Docker-Research/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/TokenServiceAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/mkabhishek/.nuget/NuGet/NuGet.Config"
+        "/home/runner/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -4058,6 +4058,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.15, 8.0.15]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.linux-x64",
+            "version": "[8.0.15, 8.0.15]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.15, 8.0.15]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -4066,7 +4080,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.408/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/tmp/codeql-scratch-8d4b6dec558e2a35/dbs/csharp/working/.dotnet/sdk/8.0.408/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
