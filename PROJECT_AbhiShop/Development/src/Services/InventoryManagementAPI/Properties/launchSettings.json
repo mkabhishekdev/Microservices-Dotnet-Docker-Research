@@ -19,6 +19,8 @@
     "InventoryManagementAPI": {
       "commandName": "Project",
       "launchBrowser": true,
+      "applicationUrl": "http://localhost:5100",
+      "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace InventoryManagementAPI.Data.Migrations
@@ -19,20 +18,24 @@ namespace InventoryManagementAPI.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
-                .HasAnnotation("Relational:Sequence:.category_hilo", "'category_hilo', '', '1', '10', '', '', 'Int64', 'False'")
-                .HasAnnotation("Relational:Sequence:.product_hilo", "'product_hilo', '', '1', '10', '', '', 'Int64', 'False'")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.HasSequence<long>("category_hilo").IncrementsBy(10);
+            modelBuilder.HasSequence<long>("product_hilo").IncrementsBy(10);
 
             modelBuilder.Entity("InventoryManagementAPI.Domain.InventoryCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:HiLoSequenceName", "category_hilo")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<string>("invCategory")
                         .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -43,24 +46,32 @@ namespace InventoryManagementAPI.Data.Migrations
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:HiLoSequenceName", "product_hilo")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
-                    b.Property<string>("category");
+                    b.Property<string>("category")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("description");
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("imageName");
+                    b.Property<string>("imageName")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("imageURL");
+                    b.Property<string>("imageURL")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("inventoryCategoryId");
+                    b.Property<int>("inventoryCategoryId")
+                        .HasColumnType("int");
 
-                    b.Property<decimal>("price");
+                    b.Property<decimal>("price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("productName")
                         .IsRequired()
-                        .HasMaxLength(50);
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("id");
 

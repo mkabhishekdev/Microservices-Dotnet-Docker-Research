@@ -2,16 +2,17 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
-using IdentityModel;
-using IdentityServer4.Extensions;
-using IdentityServer4.Services;
-using IdentityServer4.Stores;
+using Duende.IdentityModel;
+using Duende.IdentityServer.Extensions;
+using Duende.IdentityServer.Services;
+using Duende.IdentityServer.Stores;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IdentityServer4.Quickstart.UI
+namespace TokenServiceAPI.Quickstart.UI
 {
     public class AccountService
     {
@@ -131,9 +132,11 @@ namespace IdentityServer4.Quickstart.UI
             if (user?.Identity.IsAuthenticated == true)
             {
                 var idp = user.FindFirst(JwtClaimTypes.IdentityProvider)?.Value;
-                if (idp != null && idp != IdentityServer4.IdentityServerConstants.LocalIdentityProvider)
+                if (idp != null && idp != Duende.IdentityServer.IdentityServerConstants.LocalIdentityProvider)
                 {
-                    var providerSupportsSignout = await _httpContextAccessor.HttpContext.GetSchemeSupportsSignOutAsync(idp);
+                    var httpContext = _httpContextAccessor.HttpContext;
+                    var handlerProvider = httpContext.RequestServices.GetRequiredService<IAuthenticationHandlerProvider>();
+                    var providerSupportsSignout = await handlerProvider.GetHandlerAsync(httpContext, idp) is IAuthenticationSignOutHandler;
                     if (providerSupportsSignout)
                     {
                         if (vm.LogoutId == null)

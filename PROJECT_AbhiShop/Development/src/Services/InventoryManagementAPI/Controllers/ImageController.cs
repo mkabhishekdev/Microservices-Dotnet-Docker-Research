@@ -13,9 +13,9 @@ namespace InventoryManagementAPI.Controllers
     [Route("api/Image")]
     public class ImageController : Controller
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
-        public ImageController(IHostingEnvironment env)
+        public ImageController(IWebHostEnvironment env)
         {
             _env = env;
         }
@@ -31,4 +31,3 @@ namespace InventoryManagementAPI.Controllers
         }
     }
 }
-

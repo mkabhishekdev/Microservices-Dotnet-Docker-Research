@@ -1,32 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "/Users/AbhiKemp/Desktop/Development/src/Services/InventoryManagementAPI/InventoryManagementAPI.csproj": {}
+    "/home/runner/work/Microservices-Dotnet-Docker-Research/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/InventoryManagementAPI/InventoryManagementAPI.csproj": {}
   },
   "projects": {
-    "/Users/AbhiKemp/Desktop/Development/src/Services/InventoryManagementAPI/InventoryManagementAPI.csproj": {
+    "/home/runner/work/Microservices-Dotnet-Docker-Research/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/InventoryManagementAPI/InventoryManagementAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/AbhiKemp/Desktop/Development/src/Services/InventoryManagementAPI/InventoryManagementAPI.csproj",
+        "projectUniqueName": "/home/runner/work/Microservices-Dotnet-Docker-Research/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/InventoryManagementAPI/InventoryManagementAPI.csproj",
         "projectName": "InventoryManagementAPI",
-        "projectPath": "/Users/AbhiKemp/Desktop/Development/src/Services/InventoryManagementAPI/InventoryManagementAPI.csproj",
-        "packagesPath": "/Users/AbhiKemp/.nuget/packages/",
-        "outputPath": "/Users/AbhiKemp/Desktop/Development/src/Services/InventoryManagementAPI/obj/",
+        "projectPath": "/home/runner/work/Microservices-Dotnet-Docker-Research/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/InventoryManagementAPI/InventoryManagementAPI.csproj",
+        "packagesPath": "/tmp/codeql-scratch-8d4b6dec558e2a35/dbs/csharp/working/packages",
+        "outputPath": "/home/runner/work/Microservices-Dotnet-Docker-Research/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/InventoryManagementAPI/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "/Users/AbhiKemp/.nuget/NuGet/NuGet.Config"
+          "/home/runner/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp2.0"
+          "net8.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp2.0": {
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -34,32 +32,38 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "netcoreapp2.0": {
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.AspNetCore.All": {
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
-              "version": "[2.0.0, )"
+              "version": "[8.0.31, )"
             },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "target": "Package",
-              "version": "[2.0.0, )"
-            },
-            "Microsoft.NETCore.App": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.0.0, )",
-              "autoReferenced": true
+              "version": "[8.0.31, )"
             },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[2.0.0, )"
+              "version": "[8.0.31, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[1.0.0, )"
+              "version": "[8.1.4, )"
+            },
+            "Swashbuckle.AspNetCore.Newtonsoft": {
+              "target": "Package",
+              "version": "[8.1.4, )"
             }
           },
           "imports": [
@@ -68,11 +72,34 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.0.101/RuntimeIdentifierGraph.json"
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.15, 8.0.15]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[8.0.15, 8.0.15]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.15, 8.0.15]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/tmp/codeql-scratch-8d4b6dec558e2a35/dbs/csharp/working/.dotnet/sdk/8.0.408/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

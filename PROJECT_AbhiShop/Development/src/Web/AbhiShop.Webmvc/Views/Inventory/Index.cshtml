@@ -80,18 +80,18 @@
 <div class="container">
     @if (Model.InventoryItems.Count() > 0)
     {
-    @Html.Partial("_pagination", Model.PaginationInfo)
+    @await Html.PartialAsync("_pagination", Model.PaginationInfo)
 
     <div class="ashop-inventory-items row">
         @foreach (var inventoryItem in Model.InventoryItems)
             {
         <div class="esh-catalog-item col-md-4">
-            @Html.Partial("_product", inventoryItem)
+            @await Html.PartialAsync("_product", inventoryItem)
         </div>
             }
     </div>
 
-    @Html.Partial("_pagination", Model.PaginationInfo)
+    @await Html.PartialAsync("_pagination", Model.PaginationInfo)
     }
     else
     {

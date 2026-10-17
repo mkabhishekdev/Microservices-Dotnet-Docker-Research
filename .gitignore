@@ -1,0 +1,8 @@
+**/bin/
+**/obj/
+**/.vs/
+.DS_Store
+**/tempkey*.rsa
+**/tempkey*.jwk
+
+.fake

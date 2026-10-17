@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using AbhiShop.Webmvc.Architecture;
 using AbhiShop.Webmvc.Services;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 
@@ -28,8 +29,7 @@ namespace AbhiShop.Webmvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+            services.AddControllersWithViews();
 
 
             services.Configure<AppSettings>(Configuration);
@@ -54,8 +54,10 @@ namespace AbhiShop.Webmvc
                 options.ClientId ="mvc";
                 options.ClientSecret = "secret";
                 options.ResponseType =  "code id_token";
+                options.MapInboundClaims = false;
                 options.SaveTokens = true;
                 options.GetClaimsFromUserInfoEndpoint = true;
+                options.ClaimActions.MapUniqueJsonKey("preferred_username", "preferred_username");
                 options.RequireHttpsMetadata = false;
                 options.Scope.Add("openid");
                 options.Scope.Add("profile");
@@ -73,30 +75,31 @@ namespace AbhiShop.Webmvc
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
 
            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Inventory/Error");
             }
 
             app.UseStaticFiles();
+            app.UseRouting();
             app.UseAuthentication();
-            app.UseMvc(routes =>
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Inventory}/{action=Index}/{id?}");
-                routes.MapRoute(
+                    pattern: "{controller=Inventory}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
                   name: "defaultError",
-                  template: "{controller=Error}/{action=Error}");
+                  pattern: "{controller=Error}/{action=Error}");
             });
           
         }

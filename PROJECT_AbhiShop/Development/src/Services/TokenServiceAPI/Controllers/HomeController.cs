@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
  
-using IdentityServer4.Services;
-using IdentityServer4.Quickstart.UI;
+using Duende.IdentityServer.Services;
+using TokenServiceAPI.Quickstart.UI;
 
 namespace TokenServiceAPI.Controllers
 {

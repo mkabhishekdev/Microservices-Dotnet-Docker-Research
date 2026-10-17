@@ -13,9 +13,9 @@ using Microsoft.Extensions.Options;
 using TokenServiceAPI.Models;
 using TokenServiceAPI.Models.AccountViewModels;
 using TokenServiceAPI.Services;
-using IdentityServer4.Services;
+using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Http;
-using IdentityServer4.Quickstart.UI;
+using TokenServiceAPI.Quickstart.UI;
 
 namespace TokenServiceAPI.Controllers
 {
@@ -297,7 +297,7 @@ namespace TokenServiceAPI.Controllers
                 return SignOut(new AuthenticationProperties { RedirectUri = url }, vm.ExternalAuthenticationScheme);
             }
 
-            return View("LoggedOut", vm);
+            return View("SignedOut", vm);
         }
 
 
