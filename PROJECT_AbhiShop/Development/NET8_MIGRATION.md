@@ -104,6 +104,44 @@ IDENTITY_URL=http://192.168.1.20:5200 docker compose up --build
 
 Compose preserves the original `192.168.1.2` default for compatibility, so override it when it differs from your machine. Local `dotnet run` uses `localhost` and does not need this override. The service/container topology and host ports remain 5000/5100/5200/1445.
 
+### Preserve existing databases when upgrading
+
+The SQL Server service now stores its data in the Compose-managed `mssql_data` volume. That volume persists across container replacements, but it does not copy databases out of an older container's writable layer. Before upgrading an existing stack, back up both databases while the old `mssqlcontainer` is still running, and keep the backup files outside Docker volumes:
+
+```sh
+mkdir -p ./sql-backups
+export SA_PASSWORD='the current SQL Server SA password'
+
+for db in InventoryDb TokenServiceDb; do
+  docker exec mssqlcontainer /opt/mssql-tools/bin/sqlcmd \
+    -S localhost -U sa -P "$SA_PASSWORD" -C \
+    -Q "BACKUP DATABASE [$db] TO DISK = N'/var/opt/mssql/data/$db.bak' WITH INIT"
+  docker cp "mssqlcontainer:/var/opt/mssql/data/$db.bak" "./sql-backups/$db.bak"
+done
+```
+
+After verifying that both `.bak` files exist, replace the old container without deleting volumes, and start only SQL Server:
+
+```sh
+docker compose down
+docker compose up -d mssqlserver
+```
+
+Wait for SQL Server to accept connections, then copy the backups into the new container and restore them before starting the applications:
+
+```sh
+for db in InventoryDb TokenServiceDb; do
+  docker cp "./sql-backups/$db.bak" "mssqlcontainer:/var/opt/mssql/data/$db.bak"
+  docker exec mssqlcontainer /opt/mssql-tools18/bin/sqlcmd \
+    -S localhost -U sa -P "$SA_PASSWORD" -C \
+    -Q "RESTORE DATABASE [$db] FROM DISK = N'/var/opt/mssql/data/$db.bak' WITH REPLACE"
+done
+
+docker compose up --build
+```
+
+Do not use `docker compose down -v` during the upgrade: it removes the new persistent volume. Retain the external `.bak` files until both applications are confirmed to use the restored data.
+
 ## Database tools and reviewing changes
 
 Use the local EF Core 8 tool from `Development`. These commands generate SQL without applying it:

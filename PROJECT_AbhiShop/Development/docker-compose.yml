@@ -2,6 +2,9 @@ networks:
     frontend:
     backend:
 
+volumes:
+    mssql_data:
+
 services:
 
     abhishop.webmvc:
@@ -67,5 +70,7 @@ services:
         environment:
             - ACCEPT_EULA=Y
             - MSSQL_SA_PASSWORD=Capstone11!
+        volumes:
+            - mssql_data:/var/opt/mssql
         networks:
             - backend
