@@ -1,32 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "/Users/AbhiKemp/Desktop/Development/src/Services/TokenServiceAPI/TokenServiceAPI.csproj": {}
+    "/Users/mkabhishek/Desktop/MigrationProjects/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/TokenServiceAPI/TokenServiceAPI.csproj": {}
   },
   "projects": {
-    "/Users/AbhiKemp/Desktop/Development/src/Services/TokenServiceAPI/TokenServiceAPI.csproj": {
+    "/Users/mkabhishek/Desktop/MigrationProjects/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/TokenServiceAPI/TokenServiceAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/AbhiKemp/Desktop/Development/src/Services/TokenServiceAPI/TokenServiceAPI.csproj",
+        "projectUniqueName": "/Users/mkabhishek/Desktop/MigrationProjects/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/TokenServiceAPI/TokenServiceAPI.csproj",
         "projectName": "TokenServiceAPI",
-        "projectPath": "/Users/AbhiKemp/Desktop/Development/src/Services/TokenServiceAPI/TokenServiceAPI.csproj",
-        "packagesPath": "/Users/AbhiKemp/.nuget/packages/",
-        "outputPath": "/Users/AbhiKemp/Desktop/Development/src/Services/TokenServiceAPI/obj/",
+        "projectPath": "/Users/mkabhishek/Desktop/MigrationProjects/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/TokenServiceAPI/TokenServiceAPI.csproj",
+        "packagesPath": "/Users/mkabhishek/.nuget/packages/",
+        "outputPath": "/Users/mkabhishek/Desktop/MigrationProjects/Microservices-Dotnet-Docker-Research/PROJECT_AbhiShop/Development/src/Services/TokenServiceAPI/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "/Users/AbhiKemp/.nuget/NuGet/NuGet.Config"
+          "/Users/mkabhishek/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp2.0"
+          "net8.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp2.0": {
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -34,38 +32,38 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "netcoreapp2.0": {
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
-            "IdentityServer4": {
+            "Duende.IdentityServer": {
               "target": "Package",
-              "version": "[2.0.1, )"
+              "version": "[7.4.13, )"
             },
-            "IdentityServer4.AspNetIdentity": {
+            "Duende.IdentityServer.AspNetIdentity": {
               "target": "Package",
-              "version": "[2.0.0, )"
+              "version": "[7.4.13, )"
             },
-            "Microsoft.AspNetCore.All": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[2.0.0, )"
+              "version": "[8.0.31, )"
             },
-            "Microsoft.EntityFrameworkCore.Tools": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.0.0, )"
+              "version": "[8.0.31, )"
             },
-            "Microsoft.NETCore.App": {
-              "suppressParent": "All",
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[2.0.0, )",
-              "autoReferenced": true
-            },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[2.0.0, )"
+              "version": "[8.0.31, )"
             }
           },
           "imports": [
@@ -74,11 +72,20 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.0.101/RuntimeIdentifierGraph.json"
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.408/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

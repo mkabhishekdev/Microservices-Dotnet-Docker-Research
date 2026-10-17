@@ -1,5 +1,7 @@
 # Microservices
 
+The existing AbhiShop solution now targets .NET 8. See [the .NET 8 migration notes](PROJECT_AbhiShop/Development/NET8_MIGRATION.md) for the file changes, validation results, and local/Docker run instructions.
+
 In this project which was my M.S Degree Capstone at Rochester Institute of Technology, NY, USA, I have developed a ecommerce web application named 'AbhiShop' to demonstrate the technicalities involved in developing a Microservices model from scratch. If you are curious to understand why should someone move from a traditional design such has Monolithic to Microservices, I have written a detailed blog explaining each and every step. Below is the link to each article. This repo consists of the source code I have developed which I have explained in the article.
 
 Article 1: Introduction (Theory) 
@@ -18,4 +20,3 @@ Article 5: Execution of AbhiShop app as Microservices/Thoughts on Devops/Limitat
      Link: https://medium.com/@abhikempanna/blog-series-understanding-microservices-using-abhishop-app-a03c9265d66a
 
 ***************************************************************************************************************************
-

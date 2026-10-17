@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TokenServiceAPI.Quickstart.UI.LoggedOutViewModel
+@{
     ViewData["Title"] = "Signed out";
 }
 
@@ -6,3 +7,15 @@
 <p>
     You have successfully signed out.
 </p>
+
+@if (!string.IsNullOrEmpty(Model.PostLogoutRedirectUri))
+{
+    <p>
+        <a class="post-logout-redirect-uri" href="@Model.PostLogoutRedirectUri">Return to AbhiShop</a>
+    </p>
+}
+
+@if (!string.IsNullOrEmpty(Model.SignOutIframeUrl))
+{
+    <iframe src="@Model.SignOutIframeUrl" title="Sign out of connected applications" hidden></iframe>
+}

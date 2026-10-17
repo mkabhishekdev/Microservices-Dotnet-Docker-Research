@@ -1,8 +1,8 @@
 // Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-using IdentityServer4;
-using IdentityServer4.Models;
+using Duende.IdentityServer;
+using Duende.IdentityServer.Models;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -26,9 +26,14 @@ namespace TokenServiceAPI
         {
             return new List<ApiResource>
             {
-                 new ApiResource("cart", "Cart Management API")
+                 new ApiResource("cart", "Cart Management API") { Scopes = { "cart" } }
             };
         }  
+
+        public static IEnumerable<ApiScope> GetApiScopes()
+        {
+            return new[] { new ApiScope("cart", "Cart Management API") };
+        }
 
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
@@ -49,6 +54,8 @@ namespace TokenServiceAPI
                     ClientId = "mvc",
                     ClientSecrets = new [] { new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.Hybrid,
+                    // The existing MVC client uses code + id_token (hybrid), without PKCE.
+                    RequirePkce = false,
 
                     RedirectUris = {$"{clientUrls["Mvc"]}/signin-oidc"},
                     PostLogoutRedirectUris = {$"{clientUrls["Mvc"]}/signout-callback-oidc"},

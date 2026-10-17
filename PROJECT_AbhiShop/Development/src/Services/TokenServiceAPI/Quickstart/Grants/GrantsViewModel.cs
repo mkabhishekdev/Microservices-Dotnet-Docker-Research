@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace IdentityServer4.Quickstart.UI
+namespace TokenServiceAPI.Quickstart.UI
 {
     public class GrantsViewModel
     {

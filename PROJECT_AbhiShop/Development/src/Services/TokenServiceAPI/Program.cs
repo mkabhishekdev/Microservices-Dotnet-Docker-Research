@@ -16,7 +16,7 @@ namespace TokenServiceAPI
 {
     public class Program
     {
-       public static void Main(string[] args)
+       public static async Task Main(string[] args)
         {
             var host = BuildWebHost(args);
 
@@ -32,7 +32,7 @@ namespace TokenServiceAPI
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                     // var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
-                    IdentityDbInit.Initialize(context, userManager);
+                    await IdentityDbInit.Initialize(context, userManager);
                 }
                 catch (Exception ex)
                 {

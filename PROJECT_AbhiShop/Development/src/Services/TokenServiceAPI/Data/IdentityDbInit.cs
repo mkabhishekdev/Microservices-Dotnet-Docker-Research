@@ -10,12 +10,12 @@ namespace TokenServiceAPI.Data
 {
     public class IdentityDbInit
     {
-        public static async void Initialize(
+        public static async Task Initialize(
             ApplicationDbContext context,
             UserManager<ApplicationUser> userManager)
         {
-            context.Database.Migrate();
-            if (context.Users.Any(r => r.UserName == "me@myemail.com")) return;
+            await context.Database.MigrateAsync();
+            if (await context.Users.AnyAsync(r => r.UserName == "me@myemail.com")) return;
             string user = "me@myemail.com";
             string password = "P@ssword1";
             await userManager.CreateAsync(new ApplicationUser { UserName = user, Email = user, EmailConfirmed = true }, password);

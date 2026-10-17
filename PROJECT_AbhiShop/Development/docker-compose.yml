@@ -1,4 +1,3 @@
-version: "3.2"
 networks:
     frontend:
     backend:
@@ -12,7 +11,8 @@ services:
        environment:
        - ASPNETCORE_ENVIRONMENT=Development
        - InventoryUrl=http://inventory
-       - IdentityUrl=http://192.168.1.2:5200
+       # Use a host LAN address reachable from both your browser and Docker.
+       - IdentityUrl=${IDENTITY_URL:-http://192.168.1.2:5200}
        container_name: abhishopfront
        ports:
           - "5000:80"
@@ -31,6 +31,8 @@ services:
         - DatabaseName=InventoryDb
         - DatabaseUser=sa
         - DatabaseUserPassword=Capstone11! 
+        - DatabaseTrustServerCertificate=true
+        - ASPNETCORE_ENVIRONMENT=Development
        container_name: inventoryapi
        ports:
          - "5100:80"
@@ -47,6 +49,7 @@ services:
         environment: 
         - ASPNETCORE_ENVIRONMENT=Development
         - MvcClient=http://localhost:5000
+        - ConnectionStrings__DefaultConnection=Server=mssqlserver;Database=TokenServiceDb;User Id=sa;Password=Capstone11!;TrustServerCertificate=true;
         container_name: tokenserviceapi
         ports:
             - "5200:80"
@@ -57,13 +60,12 @@ services:
             - mssqlserver
 
     mssqlserver:
-        image: "microsoft/mssql-server-linux:latest"
+        image: "mcr.microsoft.com/mssql/server:2022-latest"
         ports:
             - "1445:1433"
         container_name: mssqlcontainer
         environment:
             - ACCEPT_EULA=Y
-            - SA_PASSWORD=Capstone11!
+            - MSSQL_SA_PASSWORD=Capstone11!
         networks:
             - backend
-

@@ -24,12 +24,13 @@ namespace InventoryManagementAPI.Data
         {
             entityBuilder.ToTable("Product");
             entityBuilder.Property(c => c.id)                         /* FIX: 'id' naming a primary key in this way allows EF to recognize while migration  */
-                .ForSqlServerUseSequenceHiLo("product_hilo")
+                .UseHiLo("product_hilo")
                 .IsRequired(true);
             entityBuilder.Property(c => c.productName)
                 .IsRequired(true)
                 .HasMaxLength(50);
             entityBuilder.Property(c => c.price)
+                .HasColumnType("decimal(18,2)")
                 .IsRequired(true);
             entityBuilder.Property(c => c.imageURL)
                 .IsRequired(false);
@@ -43,7 +44,7 @@ namespace InventoryManagementAPI.Data
         {
             entityBuilder.ToTable("InventoryCategory");
             entityBuilder.Property(c => c.Id)                                /* FIX: 'Id' naming a primary key in this way allows EF to recognize while migration  */
-                .ForSqlServerUseSequenceHiLo("category_hilo")
+                .UseHiLo("category_hilo")
                 .IsRequired(true);
             entityBuilder.Property(c => c.invCategory)
                 .IsRequired()
