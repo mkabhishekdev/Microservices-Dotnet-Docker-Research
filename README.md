@@ -1,22 +1,55 @@
-# Microservices
+# AbhiShop: Microservices with .NET and Docker
 
-The existing AbhiShop solution now targets .NET 8. See [the .NET 8 migration notes](PROJECT_AbhiShop/Development/NET8_MIGRATION.md) for the file changes, validation results, and local/Docker run instructions.
+AbhiShop is a sample e-commerce application built to explore how a traditional web application can be organized as microservices. It began as an M.S. capstone project at Rochester Institute of Technology and is the code companion to the [Understanding Microservices using AbhiShop](#the-article-series) article series.
 
-In this project which was my M.S Degree Capstone at Rochester Institute of Technology, NY, USA, I have developed a ecommerce web application named 'AbhiShop' to demonstrate the technicalities involved in developing a Microservices model from scratch. If you are curious to understand why should someone move from a traditional design such has Monolithic to Microservices, I have written a detailed blog explaining each and every step. Below is the link to each article. This repo consists of the source code I have developed which I have explained in the article.
+The solution currently targets **.NET 8**. It contains three application projects and a SQL Server database, with Docker Compose to run them together. The design is intentionally focused on this example: it does not add a message broker, API gateway, or extra service layers.
 
-Article 1: Introduction (Theory) 
-     Link: https://medium.com/@abhikempanna/blog-series-understanding-microservices-using-abhishop-app-3a02b2f9a36f
+## What the application contains
 
-Article 2: Traditional/Monolithic Design
-     Link: https://medium.com/@abhikempanna/blog-series-understanding-microservices-using-abhishop-app-f8a184f4f184
+| Component | Responsibility |
+| --- | --- |
+| **AbhiShop.Webmvc** | The customer-facing ASP.NET Core MVC storefront. It displays the shop and uses the other applications for inventory and sign-in. |
+| **InventoryManagementAPI** | An ASP.NET Core API for the product catalog, including inventory data and product images. It also exposes Swagger documentation. |
+| **TokenServiceAPI** | The sign-in and token service. It uses ASP.NET Identity and Duende IdentityServer to authenticate the storefront. |
+| **SQL Server** | Stores inventory and identity data in the `InventoryDb` and `TokenServiceDb` databases. |
 
-Article 3: Roadmap towards Microservices
-     Link: https://medium.com/@abhikempanna/understanding-microservices-using-abhishop-app-68bab7054744
+At a high level, the browser uses the storefront, which requests product data from the inventory API. When a customer signs in, the storefront redirects to the token service and uses its authentication response. The applications connect to their respective databases.
 
-Article 4: Development of AbhiShop application using Microservices approach
-     Link: https://medium.com/@abhikempanna/blog-series-understanding-microservices-using-abhishop-app-76c19ad849ee
+## Repository layout
 
-Article 5: Execution of AbhiShop app as Microservices/Thoughts on Devops/Limitations
-     Link: https://medium.com/@abhikempanna/blog-series-understanding-microservices-using-abhishop-app-a03c9265d66a
+```text
+PROJECT_AbhiShop/
+└── Development/
+    ├── Development.sln
+    ├── docker-compose.yml
+    └── src/
+        ├── Services/
+        │   ├── InventoryManagementAPI/
+        │   └── TokenServiceAPI/
+        └── Web/
+            └── AbhiShop.Webmvc/
+```
 
-***************************************************************************************************************************
+The solution, Compose file, and all three applications are under `PROJECT_AbhiShop/Development`. Each application has its own project file and Dockerfile. The [migration guide](PROJECT_AbhiShop/Development/NET8_MIGRATION.md) covers the .NET 8 update, local and Docker run instructions, database setup, configuration, and validation details.
+
+## Run and explore
+
+To build the solution locally, install the .NET 8 SDK and run:
+
+```sh
+cd PROJECT_AbhiShop/Development
+dotnet restore Development.sln
+dotnet build Development.sln
+```
+
+To run the full stack in containers, install Docker and follow the [Docker setup instructions](PROJECT_AbhiShop/Development/NET8_MIGRATION.md#running-the-complete-docker-stack). The identity-service address must be reachable by both your browser and the storefront container, so the guide explains how to set `IDENTITY_URL` for your network.
+
+## The article series
+
+The articles explain the ideas behind the project and the steps taken to build it:
+
+1. [Introduction (theory)](https://medium.com/@abhikempanna/blog-series-understanding-microservices-using-abhishop-app-3a02b2f9a36f)
+2. [Traditional / monolithic design](https://medium.com/@abhikempanna/blog-series-understanding-microservices-using-abhishop-app-f8a184f4f184)
+3. [Roadmap towards microservices](https://medium.com/@abhikempanna/understanding-microservices-using-abhishop-app-68bab7054744)
+4. [Developing AbhiShop using a microservices approach](https://medium.com/@abhikempanna/blog-series-understanding-microservices-using-abhishop-app-76c19ad849ee)
+5. [Running AbhiShop as microservices: DevOps and limitations](https://medium.com/@abhikempanna/blog-series-understanding-microservices-using-abhishop-app-a03c9265d66a)
